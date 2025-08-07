@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>606</width>
+    <height>361</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Export All</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_reset">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    padding-left:21px;
+    padding-right:21px;
+    padding-top:10.5px;
+    padding-bottom:10.5px;
+	background-color: rgb(220, 53, 69);
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover{
+	background-color: rgb(187, 45, 59);
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBox_create_subdir">
+     <property name="text">
+      <string>Create Subfolder</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pushButton_export_project">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    padding-left:21px;
+    padding-right:21px;
+    padding-top:10.5px;
+    padding-bottom:10.5px;
+	background-color: rgb(13, 110, 253);
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover{
+	background-color: rgb(11, 94, 215);
+}
+QPushButton:disabled{
+	color: rgb(175, 177, 180);
+	background-color: rgb(43, 86, 180);
+}</string>
+       </property>
+       <property name="text">
+        <string>Export Unity Project</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="pushButton_export_prim_content">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    padding-left:21px;
+    padding-right:21px;
+    padding-top:10.5px;
+    padding-bottom:10.5px;
+	background-color: rgb(13, 110, 253);
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover{
+	background-color: rgb(11, 94, 215);
+}
+QPushButton:disabled{
+	color: rgb(175, 177, 180);
+	background-color: rgb(43, 86, 180);
+}</string>
+       </property>
+       <property name="text">
+        <string>Export Primary Content</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="pushButton_sel_dir">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    padding-left:21px;
+    padding-right:21px;
+    padding-top:10.5px;
+    padding-bottom:10.5px;
+	background-color: rgb(25, 135, 84);
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover{
+	background-color: rgb(21, 115, 71);
+}</string>
+       </property>
+       <property name="text">
+        <string>Select Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_danger">
+     <property name="styleSheet">
+      <string notr="true">color: rgba(255, 255, 255, 0);</string>
+     </property>
+     <property name="text">
+      <string>Warning: this directory is not empty. All content will be deleted.
+
+</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

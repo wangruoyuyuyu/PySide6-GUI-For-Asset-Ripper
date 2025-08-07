@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>648</width>
+    <height>484</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Asset Ripper Settings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">font: 26pt &quot;Microsoft YaHei UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Options</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>622</width>
+        <height>879</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Import</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Script Content Level</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QComboBox" name="comboBox_bund_ass_em">
+            <property name="currentText">
+             <string>Direct Export</string>
+            </property>
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Group By Asset Type</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Group By Bundle Name</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Direct Export</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_rm_null_attr">
+            <property name="text">
+             <string>Remove Nullable Attributes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBox_skp_opt_fold">
+            <property name="text">
+             <string>Skip StreamingAssets Folder</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Default. This exports full methods for Mono games and dummy methods for IL2Cpp games.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="2">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="checkBox_pub_asm">
+            <property name="text">
+             <string>Publicize Assemblies</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bundled assets are exported without grouping.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Target Version For Version Changing</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Experimental</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Bundled Assets Export Mode</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Default Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_def_ver"/>
+          </item>
+          <item row="5" column="1">
+           <widget class="QComboBox" name="comboBox_scr_cont_lev">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Level 0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Level 1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Level 2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Level 3</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QCheckBox" name="checkBox_enable_pref_ol">
+            <property name="text">
+             <string>Enable Prefab Outlining</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLineEdit" name="lineEdit_targ_ver_chang"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Export</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>The C# language version to be used when decompiling scripts.
+
+</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>C# Language Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>Special assemblies like Assembly-CSharp are decompiled. Other assemblies are exported in their compiled Dll form.
+
+</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>This affects all exported images.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>Export the shader as a dummy shader. Although it preserves data like the properties and fallback, it uses general, opaque shader code.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Lightmap Texture Export Format</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="label_22">
+            <property name="text">
+             <string>Script Export Format</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_18">
+            <property name="text">
+             <string>Export as yaml assets which can be viewed in the editor. This is the only mode that ensures a precise recovery of all metadata of sprites.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Audio Export Format</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Shader Export Format</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="comboBox_shd_form_exp">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Dummy Shader</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Yaml Asset</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Disassembly</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Decompilation</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QComboBox" name="comboBox_lang_ver">
+            <property name="currentIndex">
+             <number>17</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>C# 1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 7.1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 7.2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 7.3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# 12</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>C# Latest</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Automatic - Experimental</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Automatic - Safe</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Export assets as the content type embedded inside the FSB. Most audio types are exported as WAV, some are exported as OGG.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>Sprite Export Format</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>Export as a plain text file, but try to guess the correct file extension (e.g. JSON files get the .json extension).</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QComboBox" name="comboBox_sprite_exp_form">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Yaml</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Unity</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Texture</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QComboBox" name="comboBox_ta_exp_form">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Bytes</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Plain Text</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Parse</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_i_exp_form">
+            <property name="currentIndex">
+             <number>4</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Bmp</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Exr</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hdr</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Jpeg</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Png</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Tga</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>This affects all exported lightmap textures.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>TextAsset Export Format</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QComboBox" name="comboBox_lm_exp_form">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Exr</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Image</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Yaml</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Image Export Format</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="comboBox_ado_exp_form">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Yaml</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Raw</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Convert to WAV</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QComboBox" name="comboBox_scr_exp_form">
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Decompilation</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hybrid</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dll Export With Renaming</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dll Export Without Renaming</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="checkBox_script_fully_qua_name">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_script_use_full_qua_name">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Scripts use fully-qualified type names
+</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="9" column="1">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="checkBox_save_disk">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_save_disk">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Save Settings to Disk</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
