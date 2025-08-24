@@ -1,0 +1,11 @@
+PySide6
+pyperclip
+pywin32
+pyinstaller
+ffpyplayer
+ffpyplayer-stubs
+python-vlc
+requests
+chardet
+psutil
+beautifulsoup4
