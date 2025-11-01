@@ -1,6 +1,7 @@
 from uip import ui_settingsWindow
 from PySide6 import QtWidgets, QtCore
-import _thread, api
+import _thread, api, constants
+from iniConfig import IniFile
 
 
 class WheelFilter(QtCore.QObject):
@@ -22,8 +23,20 @@ class SettingsWindow(ui_settingsWindow.Ui_Dialog, QtWidgets.QDialog):
         self.setupUi(self)
         self.form_names: dict = None
 
+        self.init_local_config()
+
         self.setEventFilter()
         self.setupSignal()
+        self.retranslateBtnBx()
+
+    def retranslateBtnBx(self):
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Cancel).setText(
+            QtCore.QCoreApplication.translate("Dialog", "Cancel")
+        )
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Save).setText(
+            QtCore.QCoreApplication.translate("Dialog", "Save")
+        )
+        print(QtCore.QCoreApplication.translate("Dialog", "Save"))
 
     def setFormNames(self, fn: dict):
         self.form_names = fn
@@ -120,6 +133,8 @@ class SettingsWindow(ui_settingsWindow.Ui_Dialog, QtWidgets.QDialog):
         return ret
 
     def accept(self):
+        self.save_local_config()
+
         self._prompt_window = QtWidgets.QLabel("请稍后... Please wait...")
         self._prompt_window.setWindowTitle("加载中... Loading...")
         self._prompt_window.show()
@@ -133,12 +148,19 @@ class SettingsWindow(ui_settingsWindow.Ui_Dialog, QtWidgets.QDialog):
         self._prompt_window.close()
         self.setEnabled(True)
         if self.post_ret_code == 200 or self.post_ret_code == 302:
-            QtWidgets.QMessageBox.information(self, "Success", "Settings Saved")
+            QtWidgets.QMessageBox.information(
+                self,
+                QtCore.QCoreApplication.translate("Dialog", "Success"),
+                QtCore.QCoreApplication.translate("Dialog", "Settings Saved"),
+            )
         else:
             QtWidgets.QMessageBox.critical(
                 self,
-                "Failed",
-                "Cannot Save Settings, status code:" + str(self.post_ret_code),
+                QtCore.QCoreApplication.translate("Dialog", "Failed"),
+                QtCore.QCoreApplication.translate(
+                    "Dialog", "Cannot Save Settings, status code:"
+                )
+                + str(self.post_ret_code),
             )
             return False
         return super().accept()
@@ -148,6 +170,24 @@ class SettingsWindow(ui_settingsWindow.Ui_Dialog, QtWidgets.QDialog):
             self._get_post_values(), self.parent().port
         )
         self.posted = True
+
+    def init_local_config(self):
+        self.ini_config = IniFile(constants.CONFIG_FILE_NAME)
+        isTaskBarProg = self.ini_config.getValue("GUI", "show_taskbar_progress", 1)
+        if isTaskBarProg != "0" and isTaskBarProg != 0:
+            self.checkBox_show_taskbar_prog.setChecked(True)
+        else:
+            self.checkBox_show_taskbar_prog.setChecked(False)
+
+    def save_local_config(self):
+        self.ini_config.setValue(
+            "GUI",
+            "show_taskbar_progress",
+            int(self.checkBox_show_taskbar_prog.isChecked()),
+        )
+        with open(constants.CONFIG_FILE_NAME, "w+") as f:
+            self.ini_config.writeToFile(f)
+            f.close()
 
 
 if __name__ == "__main__":

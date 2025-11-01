@@ -4,7 +4,7 @@ import webbrowser
 
 
 class AboutWindow(ui_aboutWindow.Ui_Dialog, QtWidgets.QDialog):
-    VERSION = "1.0.0"
+    VERSION = "1.1.0"
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)

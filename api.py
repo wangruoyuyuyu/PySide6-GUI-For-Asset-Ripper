@@ -1,6 +1,23 @@
 import requests
 import _thread
-import parser
+import sys,importlib.util
+if sys.version_info.minor==9:
+    try:
+        from . import parser
+    except (ImportError,ModuleNotFoundError):
+        parser=None
+else:
+    import parser
+
+def import_from_file(module_name, file_path):
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+if not parser:
+    parser=import_from_file("parser","./parser.py")
+
 import re
 import chardet  # 导入chardet库用于编码检测
 from urllib.parse import quote, unquote

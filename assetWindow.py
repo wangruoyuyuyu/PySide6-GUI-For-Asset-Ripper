@@ -1,9 +1,12 @@
 from uip import ui_assetWindow
 from PySide6 import QtWidgets, QtCore, QtGui
 import _thread, api, browseWindow, pyperclip, downloader, typing, os, path_saver
+from INSLogger import Logger
 
 
 class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
+    logger = Logger("AssetWindow")
+
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.setupUi(self)
@@ -44,16 +47,16 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
     def init_progress_bar(self):
         """初始化进度条交互功能"""
         # 设置进度条范围
-        self.horizontalSlider_playprogress.setRange(0, 100)
+        # self.horizontalSlider_playprogress.setRange(0, 100) #Not needed in the new version
 
-        # 连接滑块信号
-        self.horizontalSlider_playprogress.sliderPressed.connect(self.on_slider_pressed)
-        self.horizontalSlider_playprogress.sliderReleased.connect(
-            self.on_slider_released
-        )
-        self.horizontalSlider_playprogress.valueChanged.connect(
-            self.on_slider_value_changed
-        )
+        # # 连接滑块信号
+        # self.horizontalSlider_playprogress.sliderPressed.connect(self.on_slider_pressed)
+        # self.horizontalSlider_playprogress.sliderReleased.connect(
+        #     self.on_slider_released
+        # )
+        # self.horizontalSlider_playprogress.valueChanged.connect(
+        #     self.on_slider_value_changed
+        # )
 
     def on_slider_pressed(self):
         """进度条开始拖动时调用"""
@@ -154,10 +157,10 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
                 self.js_code, self._on_font_js_executed
             )
         else:
-            print("字体预览页面加载失败")
+            self.logger.log("字体预览页面加载失败")
 
     def _on_font_js_executed(self, result):
-        print("JS执行完成，结果:", result)
+        self.logger.log("JS执行完成，结果:", result)
 
     def setData(self, data: dict):
         if "H1" in data.keys():
@@ -174,6 +177,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
                 if url.startswith("/"):
                     url = f"http://localhost:{self.parent().parent().port}" + url
                 self.widget_image.loader.load_image(url)
+                self.pushButton_saveimage.clicked.connect(self.save_img)
             else:
                 self.tabWidget.setTabEnabled(2, False)
         else:
@@ -182,9 +186,9 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
             self.tabWidget.setTabEnabled(6, True)
             full_link = f"http://localhost:{self.parent().parent().port}{data['Video']}"
             self.widget_video_play.load_video(full_link)
-            self.video_check_interval = QtCore.QTimer()
-            self.video_check_interval.timeout.connect(self.update_vdo_proc)
-            self.video_check_interval.start(1000)  # 1秒更新一次
+            # self.video_check_interval = QtCore.QTimer()
+            # self.video_check_interval.timeout.connect(self.update_vdo_proc)
+            # self.video_check_interval.start(1000)  # 1秒更新一次
             self.pushButton_savevdo.clicked.connect(self.save_vdo)
         else:
             self.pushButton_savevdo.clicked.connect(self.empty)
@@ -245,7 +249,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         self.setEnabled(True)
 
         save_name: str = self.audio_name
-        filters = f"{save_name.split(".")[1]} File (*.{save_name.split(".")[1]})"
+        filters = f"{save_name.split('.')[1]} File (*.{save_name.split('.')[1]})"
         save_path = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Save File...",
@@ -258,7 +262,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         self.saving_dialogs.append(downloader.Downloader(self))
         self.saving_dialogs[-1].show()
         full_url = (
-            f"http://localhost:{self.parent().parent().port}{self._data["Audio"]}"
+            f"http://localhost:{self.parent().parent().port}{self._data['Audio']}"
         )
         self.saving_dialogs[-1].file_download(full_url, save_path)
 
@@ -284,7 +288,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         self.setEnabled(True)
 
         save_name: str = self.vdo_name
-        filters = f"{save_name.split(".")[1]} File (*.{save_name.split(".")[1]})"
+        filters = f"{save_name.split('.')[1]} File (*.{save_name.split('.')[1]})"
         save_path = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Save File...",
@@ -297,7 +301,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         self.saving_dialogs.append(downloader.Downloader(self))
         self.saving_dialogs[-1].show()
         full_url = (
-            f"http://localhost:{self.parent().parent().port}{self._data["Video"]}"
+            f"http://localhost:{self.parent().parent().port}{self._data['Video']}"
         )
         self.saving_dialogs[-1].file_download(full_url, save_path)
 
@@ -306,6 +310,31 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
             self._data["Video"], self.parent().parent().port
         )
         self.vdo_name_got = True
+
+    def save_img(self):
+        if not self._data["Image"]:
+            return
+        save_name: str = list(self._data["Image"].keys())[0]
+        ext = self._get_img_ext(list(self._data["Image"].values())[0])
+        self.logger.debug("savename:", save_name, "ext:", ext)
+        filters = f"{ext} File(*.{ext})"
+        save_path = QtWidgets.QFileDialog.getSaveFileName(
+            self,
+            "Save File...",
+            dir=os.path.join(path_saver.get_last_export_path(), save_name),
+            filter=filters,
+        )[0]
+        if not save_path:
+            return
+        path_saver.save_last_export_path(path_saver.get_file_dir(save_path))
+        self.saving_dialogs.append(downloader.Downloader(self))
+        self.saving_dialogs[-1].show()
+        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data['Image'].values())[0]}"
+        self.saving_dialogs[-1].file_download(full_url, save_path)
+
+    _get_img_ext = staticmethod(
+        lambda lnk: str(lnk).lower().split("extension=")[-1].split("&")[0]
+    )
 
     def save_yaml(self):
         if not self._data["Yaml"]:
@@ -323,7 +352,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         path_saver.save_last_export_path(path_saver.get_file_dir(save_path))
         self.saving_dialogs.append(downloader.Downloader(self))
         self.saving_dialogs[-1].show()
-        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data["Yaml"].values())[0]}"
+        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data['Yaml'].values())[0]}"
         self.saving_dialogs[-1].file_download(full_url, save_path)
 
     def save_json(self):
@@ -342,14 +371,14 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
         path_saver.save_last_export_path(path_saver.get_file_dir(save_path))
         self.saving_dialogs.append(downloader.Downloader(self))
         self.saving_dialogs[-1].show()
-        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data["Json"].values())[0]}"
+        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data['Json'].values())[0]}"
         self.saving_dialogs[-1].file_download(full_url, save_path)
 
     def save_text(self):
         if not self._data["Text"]:
             return  # 没有
         save_name: str = list(self._data["Text"].keys())[0]
-        filters = f"{save_name.split(".")[1]} File (*.{save_name.split(".")[1]});;Text File (*.txt);;All Files(*.*)"
+        filters = f"{save_name.split('.')[1]} File (*.{save_name.split('.')[1]});;Text File (*.txt);;All Files(*.*)"
         save_path = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Save File...",
@@ -360,7 +389,7 @@ class AssetWindow(ui_assetWindow.Ui_Dialog, QtWidgets.QDialog):
             return  # 取消了
         path_saver.save_last_export_path(path_saver.get_file_dir(save_path))
         self.saving_dialogs.append(downloader.Downloader(self))
-        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data["Text"].values())[0]}"
+        full_url = f"http://localhost:{self.parent().parent().port}{list(self._data['Text'].values())[0]}"
         self.saving_dialogs[-1].show()
         self.saving_dialogs[-1].file_download(full_url, save_path)
 
@@ -517,6 +546,9 @@ fontFace.load().then().catch(function(error) {{
 
     def open_content(self, table: QtWidgets.QTableWidget, selection_text: str):
         link = self._data[f"{selection_text}_links"][table.selectedItems()[0].row()]
+        if not link:
+            # 没有就退出
+            return
         if "Assets" in link:
             self.is_data_loaded = False
             self.loaded_data = None
@@ -548,7 +580,7 @@ fontFace.load().then().catch(function(error) {{
         self.loaded_data = api.get_loaded_assets(
             self.parent().parent().port, from_url=True, url=link
         )
-        # print(self.loaded_data)
+        # self.logger.log(self.loaded_data)
         self.is_data_loaded = True
 
     def closeEvent(self, arg__1):
