@@ -338,7 +338,7 @@ text-decoration: underline;color:rgb(119, 169, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>33</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -379,9 +379,15 @@ text-decoration: underline;color:rgb(119, 169, 255);</string>
     <addaction name="action_About"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>&amp;Language</string>
+    </property>
+   </widget>
    <addaction name="menu_File"/>
    <addaction name="menuView"/>
    <addaction name="menu_Export"/>
+   <addaction name="menuLanguage"/>
    <addaction name="menu_About"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -397,12 +403,12 @@ text-decoration: underline;color:rgb(119, 169, 255);</string>
   </action>
   <action name="actionReset">
    <property name="text">
-    <string>Reset</string>
+    <string>&amp;Reset</string>
    </property>
   </action>
   <action name="actionSettings">
    <property name="text">
-    <string>Settings</string>
+    <string>&amp;Settings</string>
    </property>
   </action>
   <action name="actionHome">

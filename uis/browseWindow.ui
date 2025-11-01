@@ -35,6 +35,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLineEdit" name="lineEdit_search_bundles">
+         <property name="placeholderText">
+          <string>Search...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTreeWidget" name="treeWidget">
          <column>
           <property name="text">
@@ -103,7 +110,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>-123</y>
             <width>624</width>
             <height>518</height>
            </rect>
@@ -129,6 +136,13 @@
                </widget>
               </item>
               <item>
+               <widget class="QLineEdit" name="lineEdit_search_collection_assets">
+                <property name="placeholderText">
+                 <string>Search...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QTableWidget" name="tableWidget_assets"/>
               </item>
               <item>
@@ -138,6 +152,13 @@
                 </property>
                 <property name="text">
                  <string>Dependencies</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_search_collection_dep">
+                <property name="placeholderText">
+                 <string>Search...</string>
                 </property>
                </widget>
               </item>
