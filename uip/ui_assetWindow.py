@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'assetWindowIxStRP.ui'
+## Form generated from reading UI file 'assetWindowpabXOW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -18,8 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QHeaderView,
     QLabel, QLayout, QPushButton, QSizePolicy,
-    QSlider, QSpacerItem, QTabWidget, QTableWidget,
-    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
+    QSpacerItem, QTabWidget, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 
 from audio_player import AudioPlayerWidget
 from glb_viewer import GLBViewerWidget
@@ -223,28 +223,6 @@ class Ui_Dialog(object):
 
         self.verticalLayout_8.addWidget(self.widget_video_play)
 
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.label_playprogress = QLabel(self.tab_7)
-        self.label_playprogress.setObjectName(u"label_playprogress")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.label_playprogress.sizePolicy().hasHeightForWidth())
-        self.label_playprogress.setSizePolicy(sizePolicy2)
-        self.label_playprogress.setMinimumSize(QSize(50, 0))
-
-        self.horizontalLayout_6.addWidget(self.label_playprogress)
-
-        self.horizontalSlider_playprogress = QSlider(self.tab_7)
-        self.horizontalSlider_playprogress.setObjectName(u"horizontalSlider_playprogress")
-        self.horizontalSlider_playprogress.setOrientation(Qt.Orientation.Horizontal)
-
-        self.horizontalLayout_6.addWidget(self.horizontalSlider_playprogress)
-
-
-        self.verticalLayout_8.addLayout(self.horizontalLayout_6)
-
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -376,7 +354,6 @@ class Ui_Dialog(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("Dialog", u"Text", None))
         self.pushButton_save_font.setText(QCoreApplication.translate("Dialog", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Dialog", u"Font", None))
-        self.label_playprogress.setText("")
         self.pushButton_savevdo.setText(QCoreApplication.translate("Dialog", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), QCoreApplication.translate("Dialog", u"Video", None))
         self.pushButton_save_yaml.setText(QCoreApplication.translate("Dialog", u"Save", None))

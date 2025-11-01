@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainWindowscvDZO.ui'
+## Form generated from reading UI file 'mainWindowcuJkWQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -215,7 +215,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 33))
+        self.menubar.setGeometry(QRect(0, 0, 800, 22))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menuView = QMenu(self.menubar)
@@ -224,6 +224,8 @@ class Ui_MainWindow(object):
         self.menu_Export.setObjectName(u"menu_Export")
         self.menu_About = QMenu(self.menubar)
         self.menu_About.setObjectName(u"menu_About")
+        self.menuLanguage = QMenu(self.menubar)
+        self.menuLanguage.setObjectName(u"menuLanguage")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -232,6 +234,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menu_Export.menuAction())
+        self.menubar.addAction(self.menuLanguage.menuAction())
         self.menubar.addAction(self.menu_About.menuAction())
         self.menu_File.addAction(self.actionOpen_File)
         self.menu_File.addAction(self.actionOpen_Folder)
@@ -261,8 +264,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Asset Ripper PySide6 GUI", None))
         self.actionOpen_File.setText(QCoreApplication.translate("MainWindow", u"&Open File", None))
         self.actionOpen_Folder.setText(QCoreApplication.translate("MainWindow", u"O&pen Folder", None))
-        self.actionReset.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
-        self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.actionReset.setText(QCoreApplication.translate("MainWindow", u"&Reset", None))
+        self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"&Settings", None))
         self.actionHome.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.actionSettings_2.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.actionConfiguration_Files.setText(QCoreApplication.translate("MainWindow", u"Configuration Files", None))
@@ -292,5 +295,6 @@ class Ui_MainWindow(object):
         self.menuView.setTitle(QCoreApplication.translate("MainWindow", u"&View", None))
         self.menu_Export.setTitle(QCoreApplication.translate("MainWindow", u"&Export", None))
         self.menu_About.setTitle(QCoreApplication.translate("MainWindow", u"&About", None))
+        self.menuLanguage.setTitle(QCoreApplication.translate("MainWindow", u"&Language", None))
     # retranslateUi
 

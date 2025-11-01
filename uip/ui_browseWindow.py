@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'browseWindowRIwoQJ.ui'
+## Form generated from reading UI file 'browseWindowgUtAof.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -16,9 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QHeaderView,
-    QLabel, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QTabWidget, QTableWidget, QTableWidgetItem,
-    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
+    QLabel, QLineEdit, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QTabWidget, QTableWidget,
+    QTableWidgetItem, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -38,6 +39,11 @@ class Ui_Dialog(object):
         self.label.setStyleSheet(u"font: 26pt \"Microsoft YaHei UI\";")
 
         self.verticalLayout.addWidget(self.label)
+
+        self.lineEdit_search_bundles = QLineEdit(self.tab)
+        self.lineEdit_search_bundles.setObjectName(u"lineEdit_search_bundles")
+
+        self.verticalLayout.addWidget(self.lineEdit_search_bundles)
 
         self.treeWidget = QTreeWidget(self.tab)
         __qtreewidgetitem = QTreeWidgetItem()
@@ -83,7 +89,7 @@ class Ui_Dialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 624, 518))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -123, 624, 518))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.widget = QWidget(self.scrollAreaWidgetContents)
@@ -97,6 +103,11 @@ class Ui_Dialog(object):
 
         self.verticalLayout_5.addWidget(self.label_4)
 
+        self.lineEdit_search_collection_assets = QLineEdit(self.widget)
+        self.lineEdit_search_collection_assets.setObjectName(u"lineEdit_search_collection_assets")
+
+        self.verticalLayout_5.addWidget(self.lineEdit_search_collection_assets)
+
         self.tableWidget_assets = QTableWidget(self.widget)
         self.tableWidget_assets.setObjectName(u"tableWidget_assets")
 
@@ -107,6 +118,11 @@ class Ui_Dialog(object):
         self.label_5.setStyleSheet(u"font: 20pt \"Microsoft YaHei UI\";")
 
         self.verticalLayout_5.addWidget(self.label_5)
+
+        self.lineEdit_search_collection_dep = QLineEdit(self.widget)
+        self.lineEdit_search_collection_dep.setObjectName(u"lineEdit_search_collection_dep")
+
+        self.verticalLayout_5.addWidget(self.lineEdit_search_collection_dep)
 
         self.tableWidget_dependencies = QTableWidget(self.widget)
         self.tableWidget_dependencies.setObjectName(u"tableWidget_dependencies")
@@ -200,12 +216,15 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Loaded Files", None))
         self.label.setText("")
+        self.lineEdit_search_bundles.setPlaceholderText(QCoreApplication.translate("Dialog", u"Search...", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Dialog", u"Bundles", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"No Items Opened", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Bundle", None))
         self.pushButton_bundleLink.setText(QCoreApplication.translate("Dialog", u"No Items Opened", None))
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Assets", None))
+        self.lineEdit_search_collection_assets.setPlaceholderText(QCoreApplication.translate("Dialog", u"Search...", None))
         self.label_5.setText(QCoreApplication.translate("Dialog", u"Dependencies", None))
+        self.lineEdit_search_collection_dep.setPlaceholderText(QCoreApplication.translate("Dialog", u"Search...", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Dialog", u"Collections", None))
         self.label_resources_title.setText(QCoreApplication.translate("Dialog", u"No Items Opened", None))
         self.label_7.setText(QCoreApplication.translate("Dialog", u"Bundle", None))
