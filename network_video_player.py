@@ -7,7 +7,7 @@ import wave
 import logging
 import requests
 import os
-import tempfile
+import tempfile, _thread
 from collections import deque
 
 try:
@@ -30,7 +30,7 @@ from PySide6.QtWidgets import (
     QTextEdit,
     QProgressDialog,
 )
-from PySide6.QtCore import Qt, QThread, Signal, QMutex, QTimer
+from PySide6.QtCore import Qt, QThread, Signal, QMutex
 from PySide6.QtGui import QImage, QPixmap, QPainter, QColor
 
 
@@ -91,7 +91,6 @@ class AudioVisualizer(QLabel):
         self.audio_data = []
         self.max_samples = 100
         self.data_status = "等待音频数据..."
-        self.isToSeek = False
 
     def update_audio(self, data, data_size=0):
         self.data_status = f"数据大小: {data_size}字节"
@@ -167,6 +166,7 @@ class VideoCaptureThread(QThread):
         self.external_seek_request = False
         self.seek_position = 0
         self.key_frames = []  # 存储关键帧位置
+        self._is_to_stop_old_frameTimer = False
 
     def load_key_frames(self):
         """预加载关键帧位置，提高定位准确性"""
@@ -224,6 +224,7 @@ class VideoCaptureThread(QThread):
         self.mutex.lock()
         self.running = True
         self.mutex.unlock()
+        self._is_to_stop_old_frameTimer = True
 
         try:
             # 明确使用FFmpeg后端打开视频
@@ -249,6 +250,8 @@ class VideoCaptureThread(QThread):
 
             play_interval = 1.0 / self.fps
             last_play_time = time.time()
+            frm = 0
+            self._is_first_frame = True
 
             while True:
                 self.mutex.lock()
@@ -292,11 +295,19 @@ class VideoCaptureThread(QThread):
 
                 self.mutex.unlock()
 
-                current_time = time.time()
-                elapsed = current_time - last_play_time
-                if elapsed < play_interval:
-                    time.sleep(play_interval - elapsed)
-                last_play_time = current_time
+                # current_time = time.time()
+                # elapsed = current_time - last_play_time
+                # if elapsed < play_interval:
+                #     time.sleep(play_interval - elapsed)
+                # last_play_time = current_time
+                frm += 1
+                if self._is_first_frame:
+                    self._is_to_stop_old_frameTimer = False
+                    _thread.start_new_thread(self._set_the_frame, tuple())
+                    self._is_first_frame = False
+                else:
+                    while frm >= self._frm:
+                        time.sleep(0.00001)
 
                 ret, frame = self.cap.read()
                 if not ret:
@@ -330,6 +341,19 @@ class VideoCaptureThread(QThread):
                 self.cap.release()
             self.running = False
             self.mutex.unlock()
+
+    def _set_the_frame(self):
+        self._frm = 0
+        while True:
+            if self._is_to_stop_old_frameTimer:
+                self._is_to_stop_old_frameTimer = False
+                break
+            if self.paused:
+                time.sleep(0.00001)
+                continue
+            self._frm += 1
+            time.sleep(1.0 / self.fps)
+            # print(self._frm)
 
     def _extract_audio_spec(self):
         if not has_ffmpeg:
@@ -442,11 +466,14 @@ class AudioPlayThread(QThread):
         self.pa = pyaudio.PyAudio()
 
         try:
-            self.debug_file = wave.open("audio_debug.wav", "wb")
-            self.debug_file.setnchannels(audio_spec["channels"])
-            self.debug_file.setsampwidth(2)
-            self.debug_file.setframerate(audio_spec["sample_rate"])
-            logging.info("调试音频文件初始化成功")
+            if "--debug" in sys.argv:
+                self.debug_file = wave.open("audio_debug.wav", "wb")
+                self.debug_file.setnchannels(audio_spec["channels"])
+                self.debug_file.setsampwidth(2)
+                self.debug_file.setframerate(audio_spec["sample_rate"])
+                logging.info("调试音频文件初始化成功")
+            else:
+                self.debug_file = None
         except Exception as e:
             self.audio_error.emit(f"调试文件创建失败: {str(e)}")
             logging.error(f"调试文件创建失败: {str(e)}")
@@ -812,8 +839,8 @@ class OpenCVVideoWidget(QWidget):
         self.target_position = 0
         self.range_supported = True  # 服务器是否支持Range请求
         self.reloading = False  # 是否正在重新加载视频
-        self.isToSeek = False
-        self.seekTo = None
+        self._is_to_play = False
+        self._itp2 = False
 
         self.init_ui()
 
@@ -1041,12 +1068,11 @@ class OpenCVVideoWidget(QWidget):
         #     progress_dialog.close()
         #     self.reloading = False
         #     self.video_label.setText("")
-        self.stop()
+        # self.play_btn.click()
         self.video_loaded = False
-        self.isToSeek = True
-        self.seekTo = target_pos_ms
+        self._to_play_dur = target_pos_ms
+        self._is_to_play = True
         self.load_video(self.video_path)
-        # self.set_play_position(target_pos_ms)
 
     def _on_audio_ready_after_reload(self, audio_spec, target_pos_ms):
         """重新加载后音频准备就绪的回调"""
@@ -1120,15 +1146,8 @@ class OpenCVVideoWidget(QWidget):
             self.video_thread.start()
             self.video_loaded = True
             self.log("视频加载完成，点击Play开始播放")
-            self._to = QTimer(self)
-
-            def tmp():
-                self._to.stop()
-                if self.isToSeek:
-                    self.play_btn.click()
-
-            self._to.timeout.connect(tmp)
-            self._to.start(100)
+            if self._is_to_play:
+                self._itp2 = True
         except Exception as e:
             QMessageBox.critical(self, "加载错误", f"无法加载视频: {str(e)}")
             self.log(f"加载错误: {str(e)}")
@@ -1188,9 +1207,12 @@ class OpenCVVideoWidget(QWidget):
             self.audio_thread.set_volume(value)
 
     def update_frame(self, q_image, timestamp):
-        if self.isToSeek:
-            self.set_play_position(self.seekTo)
-            self.isToSeek = False
+        if self._itp2:
+            self._is_to_play = False
+            self._itp2 = False
+            self.set_play_position(self._to_play_dur)
+            self.play_btn.click()
+            self.play_btn.click()
         if not self.is_dragging and not self.reloading:
             scaled_img = q_image.scaled(
                 self.video_label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
