@@ -30,7 +30,7 @@ from PySide6.QtWidgets import (
     QTextEdit,
     QProgressDialog,
 )
-from PySide6.QtCore import Qt, QThread, Signal, QMutex
+from PySide6.QtCore import Qt, QThread, Signal, QMutex, QCoreApplication
 from PySide6.QtGui import QImage, QPixmap, QPainter, QColor
 
 
@@ -861,16 +861,18 @@ class OpenCVVideoWidget(QWidget):
             widget.hide()
 
         # 控制按钮和设备选择
-        self.play_btn = QPushButton("Play")
+        self.play_btn = QPushButton(QCoreApplication.translate("Dialog", "Play"))
         self.play_btn.clicked.connect(self.toggle_play)
-        self.stop_btn = QPushButton("Stop")
+        self.stop_btn = QPushButton(QCoreApplication.translate("Dialog", "Stop"))
         self.stop_btn.clicked.connect(self.stop)
 
-        self.device_label = QLabel("音频设备:")
+        self.device_label = QLabel(
+            QCoreApplication.translate("Dialog", "Audio Device:")
+        )
         self.device_combo = QComboBox()
         self.device_combo.currentIndexChanged.connect(self.on_device_changed)
 
-        self.volume_label = QLabel("音量:")
+        self.volume_label = QLabel(QCoreApplication.translate("Dialog", "Volume:"))
         self.volume_slider = QSlider(Qt.Horizontal)
         self.volume_slider.setRange(0, 100)
         self.volume_slider.setValue(100)
@@ -1082,7 +1084,7 @@ class OpenCVVideoWidget(QWidget):
         if self.video_loaded:
             self.set_play_position(target_pos_ms)
             self.is_playing = True
-            self.play_btn.setText("Pause")
+            self.play_btn.setText(QCoreApplication.translate("Dialog", "Pause"))
 
             # 开始播放
             if self.video_thread:
@@ -1252,7 +1254,7 @@ class OpenCVVideoWidget(QWidget):
 
             if self.audio_thread and self.audio_thread.paused:
                 self.audio_thread.pause()
-            self.play_btn.setText("Pause")
+            self.play_btn.setText(QCoreApplication.translate("Dialog", "Pause"))
             self.log("开始播放")
         else:
             if not self.video_thread.paused:
@@ -1260,7 +1262,7 @@ class OpenCVVideoWidget(QWidget):
 
             if self.audio_thread and not self.audio_thread.paused:
                 self.audio_thread.pause()
-            self.play_btn.setText("Play")
+            self.play_btn.setText(QCoreApplication.translate("Dialog", "Play"))
             self.log("已暂停")
 
     def stop(self):
@@ -1306,6 +1308,7 @@ class OpenCVVideoWidget(QWidget):
         self.log(f"FFmpeg: {msg}")
 
     def closeEvent(self, event):
+        self.video_thread._is_to_stop_old_frameTimer = True
         self.stop()
         event.accept()
 
