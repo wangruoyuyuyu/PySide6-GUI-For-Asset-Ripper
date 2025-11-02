@@ -585,7 +585,11 @@ fontFace.load().then().catch(function(error) {{
 
     def closeEvent(self, arg__1):
         try:
-            self.widget_video_play.stop()
+            self.widget_video_play.stop()  # 关闭就停止视频
+        except Exception:
+            pass
+        try:
+            self.widget_audioplay.stop()  # 关闭就停止音频
         except Exception:
             pass
         return super().closeEvent(arg__1)
