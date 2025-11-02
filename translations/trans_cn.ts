@@ -694,6 +694,26 @@ This software is not sponsored by or affiliated with Unity Technologies or its a
         <source>Search...</source>
         <translation>搜索...</translation>
     </message>
+    <message>
+        <source>Audio Device:</source>
+        <translation>音频设备:</translation>
+    </message>
+    <message>
+        <source>Volume:</source>
+        <translation>音量:</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>播放</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>停止</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>暂停</translation>
+    </message>
 </context>
 <context>
     <name>Form</name>
