@@ -34,8 +34,21 @@ from PySide6.QtCore import Qt, QThread, Signal, QMutex, QCoreApplication
 from PySide6.QtGui import QImage, QPixmap, QPainter, QColor
 
 
+ISDEV = False
+if not os.path.exists(os.path.join(os.path.expanduser("~"), ".wry_asset_ripper_ui")):
+    os.mkdir(os.path.join(os.path.expanduser("~"), ".wry_asset_ripper_ui"))
+open(
+    os.path.join(os.path.expanduser("~"), ".wry_asset_ripper_ui", "video_player.log"),
+    "w+",
+).close()
 logging.basicConfig(
-    filename="video_player.log",
+    filename=(
+        "video_player.log"
+        if ISDEV
+        else os.path.join(
+            os.path.expanduser("~"), ".wry_asset_ripper_ui", "video_player.log"
+        )
+    ),
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
